@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #1b1f3b, #090a1a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    color: white;
+}
+
+.box {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    padding: 35px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255,0,100,0.4);
+    animation: pop 1.2s ease;
+    max-width: 320px;
+}
+
+h2 {
+    color: #ff6fae;
+    margin-bottom: 10px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(45deg,#ff4d6d,#ff85a2);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#text {
+    margin-top: 20px;
+    font-size: 20px;
+    min-height: 120px;
+    line-height: 1.4;
+    color: #ffd6e8;
+}
+
+.heart {
+    position: absolute;
+    font-size: 22px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes pop {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>🔒 Secret Message</h2>
+    <p>Scan kiya hai to button dabao 💌</p>
+    <button onclick="startLove()">Open My Heart ❤️</button>
+    <div id="text"></div>
+</div>
+
+<!-- Background Music -->
+<audio id="music" loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/28/audio_50b7c89b6f.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const message = `
+❤️ I Love You ❤️
+
+Tum meri zindagi ka
+sabse khoobsurat hissa ho 🌸
+
+Jab tum muskurati ho,
+meri duniya ruk jaati hai 💫
+
+Har din tumhare saath
+future imagine karta hoon...
+
+💍 Kya tum meri banogi?
+`;
+
+let i = 0;
+function typeText() {
+    if (i < message.length) {
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeText, 50);
+    }
+}
+
+function startLove() {
+    document.getElementById("music").play();
+    typeText();
+}
+
+function createHeart() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.color = Math.random() > 0.5 ? "#ff4d6d" : "#ff85a2";
+    h.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+}
+setInterval(createHeart, 250);
+</script>
+
+</body>
+</html>
